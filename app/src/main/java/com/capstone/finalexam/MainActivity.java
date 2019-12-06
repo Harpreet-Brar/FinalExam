@@ -29,7 +29,13 @@ private static ArrayList<String> value = new ArrayList ();
         Add=findViewById (R.id.button);
         Add.setOnClickListener (this);
         listView=findViewById (R.id.list);
-        populate ();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume ();
+
+        AddItemtolistview ();
     }
 
     @Override
@@ -40,7 +46,7 @@ private static ArrayList<String> value = new ArrayList ();
                     Toast.makeText(MainActivity.this,"Item already in list", Toast.LENGTH_LONG).show();
                 } else {
                     value.add(Text.getText ().toString ());
-                    populate ();
+                    AddItemtolistview ();
                 }
 
 
@@ -48,7 +54,7 @@ private static ArrayList<String> value = new ArrayList ();
         }
     }
 
-    private void populate(){
+    private void AddItemtolistview(){
         ArrayAdapter<String> placesAdapter =
                 new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, value);
         listView.setAdapter(placesAdapter);

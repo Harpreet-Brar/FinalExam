@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -53,16 +54,18 @@ public class TitlesActivity extends AppCompatActivity {
                         if(headings.isEmpty ()){
                             headings.add ("No postings found");
                         }
+                        Log.d ("test", "run: "+headings+"aa");
                         listView.setAdapter(new ArrayAdapter (TitlesActivity.this, android.R.layout.simple_list_item_1, headings));
 
                     });
                 } catch (IOException | JSONException e) {
                     runOnUiThread(() -> {
                         headings.add("Networking Error");
+                        listView.setAdapter(new ArrayAdapter (TitlesActivity.this, android.R.layout.simple_list_item_1, headings));
                         Log.d ("Exception", "run: "+e.toString ());
                     });
-                }
-                ;
+                };
+
             }
         };
 
